@@ -1,7 +1,7 @@
 package com.magacab.model;
 
 public class User {
-    private int customerId;  // ✅ Changed from userId to customerId
+    private int customerId;  // 
     private String name;
     private String address;
     private String nic;

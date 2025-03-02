@@ -3,6 +3,9 @@ package com.magacab.dao;
 import com.magacab.model.Ride;
 import com.magacab.utils.DBConnection;
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
+
 
 public class RideDAO {
 
@@ -30,4 +33,46 @@ public class RideDAO {
         }
         return false;
     }
+    
+    
+    
+public static List<Ride> getUserBookings(int userId) {
+    List<Ride> rides = new ArrayList<>();
+    String sql = "SELECT * FROM bookings WHERE customer_id = ? ORDER BY booking_number DESC";
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, userId);
+        System.out.println("Executing query with userId: " + userId); // Debugging
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            rides.add(new Ride(
+                rs.getInt("booking_id"),
+                rs.getInt("customer_id"),
+                rs.getInt("booking_number"),
+                rs.getString("pickup_location"),
+                rs.getString("destination"),
+                rs.getInt("distance"),
+                rs.getInt("vehicle_id"),
+                rs.getBigDecimal("amount"),
+                rs.getString("status")
+            ));
+        }
+        System.out.println("Total rides fetched: " + rides.size()); // Debugging
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return rides;
 }
+
+
+
+
+
+}
+
+
+    
+

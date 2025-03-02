@@ -88,6 +88,14 @@
         .btn-book:hover {
             background-color: #218838;
         }
+
+        .btn-history {
+            background-color: #17a2b8;
+        }
+
+        .btn-history:hover {
+            background-color: #138496;
+        }
     </style>
 </head>
 <body>
@@ -109,6 +117,7 @@
         <!-- Buttons -->
         <div class="button-container">
             <a href="newBooking.jsp" class="btn btn-book">🚖 Book a Ride</a>
+            <a href="bookingHistory.jsp" class="btn btn-history">📜 View Booking History</a>
         </div>
     </div>
 
