@@ -38,7 +38,16 @@ public class BookRideServlet extends HttpServlet {
             BigDecimal totalAmount = pricePerKm.multiply(new BigDecimal(distance));
 
             // Create Ride object
-            Ride ride = new Ride(0, user.getCustomerId(), bookingNumber, pickup, destination, distance, vehicleId, totalAmount, "Pending");
+            Ride ride = new Ride(
+                user.getCustomerId(), // int
+                        bookingNumber,        // int
+            pickup,               // String
+                        destination,          // String
+                        distance,             // int
+                        vehicleId,            // int
+                  totalAmount,          // BigDecimal
+                   "Pending"             // String
+);
 
             // Save ride to database
             boolean success = RideDAO.bookRide(ride);

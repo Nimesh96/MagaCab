@@ -1,9 +1,9 @@
 package com.magacab.model;
-
 import java.math.BigDecimal;
 
+
+
 public class Ride {
-    private int bookingId;
     private int customerId;
     private int bookingNumber;
     private String pickupLocation;
@@ -13,20 +13,18 @@ public class Ride {
     private BigDecimal amount;
     private String status;
 
-    public Ride(int bookingId, int customerId, int bookingNumber, String pickupLocation, String destination, int distance, int vehicleId, BigDecimal amount, String status) {
-        this.bookingId = bookingId;
-        this.customerId = customerId;
-        this.bookingNumber = bookingNumber;
-        this.pickupLocation = pickupLocation;
-        this.destination = destination;
-        this.distance = distance;
-        this.vehicleId = vehicleId;
-        this.amount = amount;
-        this.status = status;
-    }
+public Ride(int customerId, int bookingNumber, String pickupLocation, String destination, int distance, int vehicleId, BigDecimal amount, String status) {
+    this.customerId = customerId;
+    this.bookingNumber = bookingNumber;
+    this.pickupLocation = pickupLocation;
+    this.destination = destination;
+    this.distance = distance;
+    this.vehicleId = vehicleId;
+    this.amount = amount;
+    this.status = status;
+}
 
-    // Getters
-    public int getBookingId() { return bookingId; }
+    // ✅ Getters and Setters (Ensure all fields have them)
     public int getCustomerId() { return customerId; }
     public int getBookingNumber() { return bookingNumber; }
     public String getPickupLocation() { return pickupLocation; }

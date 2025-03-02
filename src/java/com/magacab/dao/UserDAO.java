@@ -3,6 +3,8 @@ package com.magacab.dao;
 import com.magacab.model.User;
 import com.magacab.utils.DBConnection;
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 
 public class UserDAO {
 
@@ -56,4 +58,88 @@ public class UserDAO {
         }
         return null;
     }
+    
+    
+    public static List<User> getAllCustomers() {
+    List<User> customers = new ArrayList<>();
+    String sql = "SELECT * FROM users ORDER BY customer_id DESC";
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+
+        while (rs.next()) {
+            User user = new User(
+                rs.getInt("customer_id"),
+                rs.getString("name"),
+                rs.getString("address"),
+                rs.getString("nic"),
+                rs.getString("phone"),
+                rs.getString("email"),
+                rs.getString("password")
+            );
+            customers.add(user);
+
+            // Debugging line
+            System.out.println("✅ Fetched Customer: " + user.getCustomerId() + " - " + user.getName());
+        }
+
+        System.out.println("✅ Total Customers Loaded: " + customers.size());
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return customers;
+}
+    
+
+    // ✅ Fetch customers by NIC
+    public static List<User> getCustomersByNIC(String nic) {
+        List<User> customers = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE nic LIKE ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + nic + "%"); // Search using wildcard
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                customers.add(new User(
+                        rs.getInt("customer_id"),
+                        rs.getString("name"),
+                        rs.getString("address"),
+                        rs.getString("nic"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customers;
+    }
+
+    // ✅ Delete a customer by ID
+    public static boolean deleteCustomer(int customerId) {
+        String sql = "DELETE FROM users WHERE customer_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, customerId);
+            int rowsDeleted = stmt.executeUpdate();
+            return rowsDeleted > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    
+    
+    
+    
 }
