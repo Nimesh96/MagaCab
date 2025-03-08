@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8" %>
-<%@ page import="com.magacab.dao.RideDAO" %>
-<%@ page import="com.magacab.model.Ride" %>
+<%@ page import="com.magacab.dao.RideDAO, com.magacab.dao.DriverDAO" %>
+<%@ page import="com.magacab.model.Ride, com.magacab.model.Driver" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -18,6 +18,9 @@
     } else {
         bookings = RideDAO.getBookingsByStatus(selectedStatus);  // Fetch filtered bookings
     }
+
+    // Fetch drivers
+    List<Driver> drivers = DriverDAO.getAllDrivers();
 %>
 
 <!DOCTYPE html>
@@ -48,7 +51,7 @@
                 <li><a href="manageBookings.jsp">📑 Manage Bookings</a></li>
                 <li><a href="manageCustomers.jsp">👥 Manage Customers</a></li>
                 <li><a href="manageVehicles.jsp">🚗 Manage Vehicles</a></li>
-                <li><a href="manageDrivers.jsp">👨🏻 ‍Manage Drivers</a></li>
+                <li><a href="manageDrivers.jsp">👨🏻 Manage Drivers</a></li>
             </ul>
         </div>
 
@@ -78,25 +81,46 @@
                     <th>Destination</th>
                     <th>Distance (KM)</th>
                     <th>Vehicle Type</th>
+                    <th>Driver</th>
                     <th>Total Price</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Payment Status</th>
                 </tr>
 
                 <% if (bookings.isEmpty()) { %>
                     <tr>
-                        <td colspan="9">No bookings found.</td>
+                        <td colspan="10">No bookings found.</td>
                     </tr>
                 <% } else { %>
                     <% for (Ride ride : bookings) { %>
-                        <tr>
+                        <tr id="row_<%= ride.getBookingNumber() %>">
                             <td><%= ride.getBookingNumber() %></td>
                             <td><%= ride.getCustomerId() %></td>
                             <td><%= ride.getPickupLocation() %></td>
                             <td><%= ride.getDestination() %></td>
                             <td><%= ride.getDistance() %></td>
-                            <td><%= ride.getVehicleId() %></td>
+                            <td>Vehicle ID: <%= ride.getVehicleId() %></td>
+
+                            <!-- ✅ Driver Selection Dropdown -->
+                            <td>
+                                <form action="AssignDriverServlet" method="post">
+                                    <input type="hidden" name="bookingNumber" value="<%= ride.getBookingNumber() %>">
+                                    <select name="driverId">
+                                        <option value="">Select Driver</option>
+                                        <% for (Driver driver : drivers) { %>
+                                            <option value="<%= driver.getDriverId() %>"
+                                                <%= (ride.getDriverId() == driver.getDriverId()) ? "selected" : "" %>>
+                                                <%= driver.getName() %>
+                                            </option>
+                                        <% } %>
+                                    </select>
+                                    <button type="submit">Assign</button>
+                                </form>
+                            </td>
+
                             <td>LKR <%= ride.getAmount() %></td>
+
+                            <!-- ✅ Status Selection Dropdown -->
                             <td>
                                 <form action="UpdateBookingServlet" method="post">
                                     <input type="hidden" name="bookingNumber" value="<%= ride.getBookingNumber() %>">
@@ -105,12 +129,15 @@
                                         <option value="Completed" <%= ride.getStatus().equals("Completed") ? "selected" : "" %>>Completed</option>
                                         <option value="Cancelled" <%= ride.getStatus().equals("Cancelled") ? "selected" : "" %>>Cancelled</option>
                                     </select>
-                            </td>
-
-                            <td>
                                     <button type="submit">Update</button>
                                 </form>
                             </td>
+
+                            <!-- ✅ Payment Status Column -->
+                            <td>
+                                <%= ride.getPaymentStatus() %>
+                            </td>
+
                         </tr>
                     <% } %>
                 <% } %>

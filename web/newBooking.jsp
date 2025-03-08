@@ -6,20 +6,22 @@
 <%@ page import="java.util.List" %>
 
 <%
+    // Get user session
     HttpSession userSession = request.getSession(false);
     User user = (userSession != null) ? (User) userSession.getAttribute("user") : null;
 
     if (user == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("login.jsp"); // Redirect to login if not logged in
+        return;
     }
 
     // Fetch available vehicles from database
     List<Vehicle> vehicles = VehicleDAO.getAllVehicles();
 
-    // Generate a random booking number
-    int bookingNumber = (int) (Math.random() * 900000) + 100000; // 6-digit random number
+    // Generate a random booking number (6-digit)
+    int bookingNumber = (int) (Math.random() * 900000) + 100000;
 
-    // Check if booking was successful
+    // Check booking response messages
     String rideSuccess = request.getParameter("rideSuccess");
     String error = request.getParameter("error");
 %>
@@ -30,6 +32,7 @@
     <meta charset="UTF-8">
     <title>New Booking - MagaCab</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    
     <script>
         function calculatePrice() {
             let distance = document.getElementById("distance").value;
@@ -39,9 +42,11 @@
 
             if (distance && pricePerKm) {
                 let totalPrice = parseFloat(distance) * parseFloat(pricePerKm);
-                document.getElementById("totalPrice").innerHTML = "LKR " + totalPrice.toFixed(2);
+                document.getElementById("totalPrice").innerText = "LKR " + totalPrice.toFixed(2);
+                document.getElementById("totalAmount").value = totalPrice.toFixed(2); // Store total in hidden input
             } else {
-                document.getElementById("totalPrice").innerHTML = "LKR 0.00";
+                document.getElementById("totalPrice").innerText = "LKR 0.00";
+                document.getElementById("totalAmount").value = "0.00";
             }
         }
     </script>
@@ -57,16 +62,17 @@
     <div class="booking-container">
         <h2>🚖 Book a Ride</h2>
 
-        
+        <!-- Success Message -->
         <% if ("true".equals(rideSuccess)) { %>
             <p class="success-message">🎉 Booking Successful!</p>
         <% } %>
 
-        
+        <!-- Error Message -->
         <% if ("true".equals(error)) { %>
             <p class="error-message">⚠️ Booking Failed. Try Again.</p>
         <% } %>
 
+        <!-- Booking Form -->
         <form action="BookRideServlet" method="post">
             <label>Booking Number:</label>
             <input type="text" name="bookingNumber" value="<%= bookingNumber %>" readonly>
@@ -97,6 +103,9 @@
                     </option>
                 <% } %>
             </select>
+
+            <!-- Hidden field for total amount -->
+            <input type="hidden" id="totalAmount" name="totalAmount" value="0.00">
 
             <h3>Total Price: <span id="totalPrice">LKR 0.00</span></h3>
 

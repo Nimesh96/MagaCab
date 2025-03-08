@@ -8,7 +8,10 @@ public class Driver {
     private String licenseNumber;
     private int vehicleId;
 
-    // Constructor
+    // ✅ Default Constructor (For flexibility)
+    public Driver() {}
+
+    // ✅ Parameterized Constructor
     public Driver(int driverId, String name, String nic, String phone, String licenseNumber, int vehicleId) {
         this.driverId = driverId;
         this.name = name;
@@ -18,7 +21,16 @@ public class Driver {
         this.vehicleId = vehicleId;
     }
 
-    // Getters and Setters
+    // ✅ Constructor without driverId (For inserting new records)
+    public Driver(String name, String nic, String phone, String licenseNumber, int vehicleId) {
+        this.name = name;
+        this.nic = nic;
+        this.phone = phone;
+        this.licenseNumber = licenseNumber;
+        this.vehicleId = vehicleId;
+    }
+
+    // ✅ Getters and Setters
     public int getDriverId() { return driverId; }
     public void setDriverId(int driverId) { this.driverId = driverId; }
 
@@ -36,4 +48,17 @@ public class Driver {
 
     public int getVehicleId() { return vehicleId; }
     public void setVehicleId(int vehicleId) { this.vehicleId = vehicleId; }
+
+    // ✅ Debugging: Override toString() for easier logging
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "driverId=" + driverId +
+                ", name='" + name + '\'' +
+                ", nic='" + nic + '\'' +
+                ", phone='" + phone + '\'' +
+                ", licenseNumber='" + licenseNumber + '\'' +
+                ", vehicleId=" + vehicleId +
+                '}';
+    }
 }
