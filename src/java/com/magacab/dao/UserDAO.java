@@ -62,7 +62,7 @@ public class UserDAO {
     
     public static List<User> getAllCustomers() {
     List<User> customers = new ArrayList<>();
-    String sql = "SELECT * FROM users ORDER BY customer_id DESC";
+    String sql = "SELECT * FROM users ORDER BY customerid DESC";
 
     try (Connection conn = DBConnection.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class UserDAO {
 
         while (rs.next()) {
             User user = new User(
-                rs.getInt("customer_id"),
+                rs.getInt("customerid"),
                 rs.getString("name"),
                 rs.getString("address"),
                 rs.getString("nic"),
@@ -106,7 +106,7 @@ public class UserDAO {
 
             while (rs.next()) {
                 customers.add(new User(
-                        rs.getInt("customer_id"),
+                        rs.getInt("customerid"),
                         rs.getString("name"),
                         rs.getString("address"),
                         rs.getString("nic"),
@@ -123,7 +123,7 @@ public class UserDAO {
 
     // ✅ Delete a customer by ID
     public static boolean deleteCustomer(int customerId) {
-        String sql = "DELETE FROM users WHERE customer_id = ?";
+        String sql = "DELETE FROM users WHERE customerid = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
