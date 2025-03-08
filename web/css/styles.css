@@ -1,13 +1,13 @@
-/* General Styling */
+/* ✅ General Styling */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f4f7fc;
     margin: 0;
     padding: 0;
     color: #333;
 }
 
-/* Navbar Styling */
+/* ✅ Navbar Styling */
 .navbar {
     background-color: #007bff;
     color: white;
@@ -16,6 +16,7 @@ body {
     justify-content: space-between;
     align-items: center;
     font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
@@ -25,44 +26,47 @@ body {
     background-color: #dc3545;
     border-radius: 5px;
     font-weight: bold;
+    transition: background 0.3s ease-in-out;
 }
 
 .navbar a:hover {
     background-color: #c82333;
 }
 
-/* Centered Container */
+/* ✅ Centered Container */
 .container {
     width: 90%;
     max-width: 1100px;
     margin: 40px auto;
     background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Headings */
+/* ✅ Headings */
 h2 {
     text-align: center;
     color: #333;
-    font-weight: 600;
-    margin-bottom: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    font-size: 26px;
 }
 
-/* Buttons */
+/* ✅ Buttons */
 button, .btn {
     display: inline-block;
-    padding: 10px 15px;
+    padding: 12px 18px;
     margin: 5px;
-    border-radius: 5px;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
     font-size: 14px;
-    font-weight: 500;
-    transition: 0.3s;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
 }
 
+/* ✅ Button Colors */
 .btn-primary {
     background-color: #007bff;
     color: white;
@@ -103,7 +107,7 @@ button, .btn {
     background-color: #138496;
 }
 
-/* Payment Table Styling */
+/* ✅ Payment Table Styling */
 .payment-table {
     width: 100%;
     border-collapse: collapse;
@@ -111,11 +115,11 @@ button, .btn {
     background: white;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .payment-table th, .payment-table td {
-    padding: 12px;
+    padding: 14px;
     border: 1px solid #ddd;
     text-align: center;
     vertical-align: middle;
@@ -126,6 +130,7 @@ button, .btn {
     color: white;
     font-weight: bold;
     white-space: nowrap;
+    text-transform: uppercase;
 }
 
 .payment-table tr:nth-child(even) {
@@ -136,16 +141,16 @@ button, .btn {
     background-color: #e9ecef;
 }
 
-/* Coupon & Amount Styling */
+/* ✅ Coupon & Amount Styling */
 .coupon-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
 }
 
 .coupon-container input {
-    width: 120px;
+    width: 140px;
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
@@ -162,41 +167,50 @@ button, .btn {
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
+    transition: background 0.3s ease-in-out;
 }
 
 .coupon-container button:hover {
     background-color: #e0a800;
 }
 
-/* Payment Info */
+/* ✅ Payment Info */
 .payment-info {
     text-align: left;
     font-size: 14px;
     line-height: 1.5;
+    font-weight: 500;
 }
 
 .payment-info span {
     display: block;
     font-weight: bold;
+    color: #007bff;
 }
 
-/* Input Fields */
+/* ✅ Input Fields */
 input[type="text"] {
-    padding: 8px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
+    width: 100%;
+    max-width: 200px;
 }
 
-/* Responsive Design */
+/* ✅ Responsive Design */
 @media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
     .payment-table {
         font-size: 12px;
     }
     
     .payment-table th, .payment-table td {
-        padding: 8px;
+        padding: 10px;
     }
     
     .coupon-container {
@@ -204,6 +218,11 @@ input[type="text"] {
     }
     
     .coupon-container input {
-        width: 100px;
+        width: 100%;
+    }
+
+    button, .btn {
+        width: 100%;
+        padding: 10px;
     }
 }

@@ -45,12 +45,12 @@ public class VehicleDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return BigDecimal.ZERO;  // ✅ Return default value if not found
+        return BigDecimal.ZERO;  
     }
     
    
 
-    // ✅ Search Vehicles by Plate Number
+    
     public static List<Vehicle> searchVehicles(String plateNumber) {
         List<Vehicle> vehicles = new ArrayList<>();
         String sql = "SELECT * FROM vehicles WHERE plate_number LIKE ?";
@@ -76,7 +76,7 @@ public class VehicleDAO {
         return vehicles;
     }
 
-    // ✅ Add a New Vehicle
+    
 public static boolean addVehicle(Vehicle vehicle) {
     String sql = "INSERT INTO vehicles (model, plate_number, capacity, price_per_km) VALUES (?, ?, ?, ?)";
 
@@ -90,7 +90,7 @@ public static boolean addVehicle(Vehicle vehicle) {
 
         int rowsInserted = stmt.executeUpdate();
 
-        // ✅ Debugging - Print execution details
+        
         System.out.println("🔹 SQL Query Executed: " + stmt.toString());
         System.out.println("🔹 Rows Inserted: " + rowsInserted);
 
@@ -102,7 +102,7 @@ public static boolean addVehicle(Vehicle vehicle) {
     return false;
 }
 
-    // ✅ Edit Existing Vehicle
+    
     public static boolean updateVehicle(Vehicle vehicle) {
         String sql = "UPDATE vehicles SET model = ?, plate_number = ?, capacity = ?, price_per_km = ? WHERE vehicle_id = ?";
 
@@ -124,7 +124,7 @@ public static boolean addVehicle(Vehicle vehicle) {
         return false;
     }
 
-    // ✅ Delete a Vehicle
+    
     public static boolean deleteVehicle(int vehicleId) {
         String sql = "DELETE FROM vehicles WHERE vehicle_id = ?";
 

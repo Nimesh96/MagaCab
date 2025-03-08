@@ -15,7 +15,7 @@
         return;
     }
 
-    // Fetch completed bookings for this user
+    
     List<Ride> bookings = RideDAO.getBookingsByStatusAndUser("Completed", user.getCustomerId());
 %>
 
@@ -183,7 +183,13 @@
                             <% if (!ride.getPaymentStatus().equals("Paid")) { %>
                                 <button class="btn btn-pay" onclick="makePayment('<%= ride.getBookingId() %>')">Pay Now</button>
                             <% } %>
-                            <button class="btn btn-download" onclick="downloadInvoice('<%= ride.getBookingId() %>')">Download Invoice</button>
+                            <button class="btn btn-info" onclick="downloadInvoice('<%= ride.getBookingId() %>')">Download Invoice</button>
+
+                                    <script>
+                                        function downloadInvoice(bookingId) {
+                                            window.open("InvoiceServlet?bookingId=" + bookingId, "_blank");
+                                        }
+                                    </script>
                         </td>
                     </tr>
                 <% } %>

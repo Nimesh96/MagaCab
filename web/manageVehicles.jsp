@@ -101,7 +101,7 @@
         </div>
     </div>
 
-    <!-- 🔹 Popup Modal for Adding a Vehicle -->
+   
     <div id="addVehiclePopup" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -138,7 +138,7 @@
 
                 fetch('AddVehicleServlet', {
                     method: 'POST',
-                    body: new URLSearchParams(formData) // Converts FormData to URL encoded format
+                    body: new URLSearchParams(formData) 
                 })
                 .then(response => response.text())
                 .then(data => {
@@ -156,7 +156,7 @@
             
             
             
-             // Open Edit Modal and Load Vehicle Data
+            
 function openEditModal(id, model, plateNumber, capacity, pricePerKm) {
     document.getElementById("editVehicleId").value = id;
     document.getElementById("editModel").value = model;
@@ -178,7 +178,7 @@ function submitEditVehicle() {
 
     fetch('EditVehicleServlet', {
         method: 'POST',
-        body: new URLSearchParams(formData) // Convert FormData to URL encoded format
+        body: new URLSearchParams(formData) 
     })
     .then(response => response.text())
     .then(data => {

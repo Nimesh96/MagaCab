@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DriverDAO {
 
-    // ✅ Get all drivers
+   
  public static List<Driver> getAllDrivers() {
     List<Driver> drivers = new ArrayList<>();
     String sql = "SELECT * FROM drivers";
@@ -38,7 +38,7 @@ Driver driver = new Driver(
     return drivers;
 }
 
-    // ✅ Insert a new driver
+    
     public static boolean addDriver(String name, String nic, String phone, String licenseNumber, int vehicleId) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -59,7 +59,7 @@ Driver driver = new Driver(
         }
     }
 
-    // ✅ Update driver
+    
 public static boolean updateDriver(int driverId, String name, String nic, String phone, String licenseNumber, int vehicleId) {
     try {
         Connection conn = DBConnection.getConnection();
@@ -81,7 +81,7 @@ public static boolean updateDriver(int driverId, String name, String nic, String
     }
 }
 
-    // ✅ Delete a driver
+    
     public static boolean deleteDriver(int driverId) {
         String sql = "DELETE FROM drivers WHERE driver_id=?";
 
@@ -97,7 +97,7 @@ public static boolean updateDriver(int driverId, String name, String nic, String
     }
     
     
-     // ✅ Search for drivers by NIC or Name
+     
     public static List<Driver> searchDrivers(String searchQuery) {
         List<Driver> drivers = new ArrayList<>();
         try {

@@ -7,16 +7,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login - MagaCab</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/auth.css">
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Login to MagaCab</h2>
+    <div class="auth-container">
+        <h2>🔑 Login to MagaCab</h2>
 
-        <%-- Show error message if login fails --%>
+        
         <% if (request.getParameter("error") != null) { %>
-            <p class="error-message">Invalid Email or Password. Please try again.</p>
+            <p class="error-message">❌ Invalid Email or Password. Please try again.</p>
         <% } %>
 
         <form action="LoginServlet" method="post">

@@ -120,7 +120,7 @@
 
                             <td>LKR <%= ride.getAmount() %></td>
 
-                            <!-- ✅ Status Selection Dropdown -->
+                           
                             <td>
                                 <form action="UpdateBookingServlet" method="post">
                                     <input type="hidden" name="bookingNumber" value="<%= ride.getBookingNumber() %>">
@@ -133,7 +133,7 @@
                                 </form>
                             </td>
 
-                            <!-- ✅ Payment Status Column -->
+                            
                             <td>
                                 <%= ride.getPaymentStatus() %>
                             </td>

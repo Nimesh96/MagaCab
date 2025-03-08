@@ -2,25 +2,44 @@ package com.magacab.model;
 
 import java.math.BigDecimal;
 
+
 public class Ride {
-    private int bookingId; // ✅ Primary Key
-    private int customerId;
-    private int bookingNumber;
+    private int bookingId;       // Primary Key
+    private int customerId;       // Foreign Key to User table
+    private int bookingNumber;    // Unique Booking Number
     private String pickupLocation;
     private String destination;
-    private int distance;
-    private int vehicleId;
-    private int driverId;
-    private BigDecimal amount;
-    private String status;
-    private String paymentStatus;
+    private int distance;         // Distance in KM
+    private int vehicleId;        // Vehicle Type ID
+    private int driverId;         // Assigned Driver ID
+    private BigDecimal amount;    // Total Fare Amount
+    private String status;        // Booking Status (Pending, Completed, Cancelled)
+    private String paymentStatus; // Payment Status (Paid, Unpaid, Pending)
+    private String customerName; 
+    
+ 
+    public Ride() {
+    }
 
-    // ✅ Updated Constructor to correctly include `bookingId`
+    /** 
+     * ✅ Parameterized Constructor
+     * @param bookingId Unique booking ID
+     * @param customerId Customer associated with booking
+     * @param bookingNumber Unique booking number
+     * @param pickupLocation Pickup address
+     * @param destination Destination address
+     * @param distance Distance in KM
+     * @param vehicleId Associated vehicle type
+     * @param driverId Assigned driver ID
+     * @param amount Total fare amount
+     * @param status Booking status
+     * @param paymentStatus Payment status (Paid/Unpaid)
+     */
     public Ride(int bookingId, int customerId, int bookingNumber, String pickupLocation,
                 String destination, int distance, int vehicleId, int driverId,
                 BigDecimal amount, String status, String paymentStatus) {
 
-        this.bookingId = bookingId; // Ensure correct assignment
+        this.bookingId = bookingId;
         this.customerId = customerId;
         this.bookingNumber = bookingNumber;
         this.pickupLocation = pickupLocation;
@@ -33,7 +52,7 @@ public class Ride {
         this.paymentStatus = paymentStatus;
     }
 
-    // ✅ Getters and Setters
+  
     public int getBookingId() { return bookingId; }
     public void setBookingId(int bookingId) { this.bookingId = bookingId; }
 
@@ -66,4 +85,27 @@ public class Ride {
 
     public String getPaymentStatus() { return paymentStatus; }
     public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+    
+    
+    public String getCustomerName() { return customerName; }
+    public void setCustomerName(String customerName) { this.customerName = customerName; }
+
+
+ 
+    @Override
+    public String toString() {
+        return "Ride{" +
+                "bookingId=" + bookingId +
+                ", customerId=" + customerId +
+                ", bookingNumber=" + bookingNumber +
+                ", pickupLocation='" + pickupLocation + '\'' +
+                ", destination='" + destination + '\'' +
+                ", distance=" + distance +
+                ", vehicleId=" + vehicleId +
+                ", driverId=" + driverId +
+                ", amount=" + amount +
+                ", status='" + status + '\'' +
+                ", paymentStatus='" + paymentStatus + '\'' +
+                '}';
+    }
 }

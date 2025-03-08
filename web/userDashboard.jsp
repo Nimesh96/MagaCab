@@ -125,11 +125,20 @@
         <p><strong>Address:</strong> <%= user.getAddress() %></p>
 
         <!-- Buttons -->
-        <div class="button-container">
-            <a href="newBooking.jsp" class="btn btn-book">🚖 Book a Ride</a>
-            <a href="bookingHistory.jsp" class="btn btn-history">📜 View Booking History</a>
-            <a href="payments.jsp" class="btn btn-payment">💳 Go to Payment</a> <!-- ✅ New Payment Button -->
-        </div>
+            <div class="d-flex justify-content-center gap-3 mt-3">
+                <a href="newBooking.jsp" class="btn btn-success fw-bold px-4">
+                    🚖 Book a Ride
+                </a>
+                <a href="bookingHistory.jsp" class="btn btn-info fw-bold px-4 text-white">
+                    📜 View Booking History
+                </a>
+                <a href="payments.jsp" class="btn btn-warning fw-bold px-4">
+                    💳 Go to Payment
+                </a>
+                    <a href="help.html" class="btn fw-bold px-4" style="background-color: #6610f2; color: white;">
+                      ❓ Help
+                    </a> <!-- ✅ Custom Purple Help Button -->
+            </div>
     </div>
 
 </body>

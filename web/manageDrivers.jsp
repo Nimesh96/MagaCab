@@ -104,7 +104,7 @@
         </div>
     </div>
 
-    <!-- 🔹 Popup Modal for Adding a Driver -->
+    
     <div id="addDriverPopup" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -130,7 +130,7 @@
         </div>
     </div>
 
-    <!-- 🔹 Popup Modal for Editing a Driver -->
+    
     <div id="editDriverPopup" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>

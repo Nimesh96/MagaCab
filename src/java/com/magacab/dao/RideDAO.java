@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class RideDAO {
 
-    // ✅ Book a Ride (User Booking)
+    
     public static boolean bookRide(Ride ride) {
         String sql = "INSERT INTO bookings (customer_id, booking_number, pickup_location, destination, distance, vehicle_id, driver_id, amount, status, payment_status) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -35,7 +35,7 @@ public class RideDAO {
         return false;
     }
 
-    // ✅ Fetch User Bookings (For Customers)
+    
     public static List<Ride> getUserBookings(int customerId) {
         List<Ride> rides = new ArrayList<>();
         String sql = "SELECT * FROM bookings WHERE customer_id = ? ORDER BY booking_number DESC";
@@ -55,7 +55,7 @@ public class RideDAO {
         return rides;
     }
 
-    // ✅ Fetch All Bookings (For Admin)
+    
     public static List<Ride> getAllBookings() {
         List<Ride> rides = new ArrayList<>();
         String sql = "SELECT * FROM bookings ORDER BY booking_number DESC";
@@ -73,7 +73,7 @@ public class RideDAO {
         return rides;
     }
 
-    // ✅ Fetch Bookings by Status (For Admin)
+   
     public static List<Ride> getBookingsByStatus(String status) {
         List<Ride> rides = new ArrayList<>();
         String sql = "SELECT * FROM bookings WHERE status = ? ORDER BY booking_number DESC";
@@ -114,7 +114,7 @@ public static boolean updateBooking(int bookingId, int driverId, int vehicleId, 
 
 
 
-    // ✅ Fetch Unpaid Bookings (For User Payment Page)
+   
     public static List<Ride> getUnpaidBookings(int customerId) {
         List<Ride> rides = new ArrayList<>();
         String sql = "SELECT * FROM bookings WHERE customer_id = ? AND payment_status = 'Pending'";
@@ -134,7 +134,7 @@ public static boolean updateBooking(int bookingId, int driverId, int vehicleId, 
         return rides;
     }
 
-// ✅ Helper Method: Map ResultSet to Ride Object
+
 private static Ride mapResultSetToRide(ResultSet rs) throws SQLException {
     return new Ride(
         rs.getInt("booking_id"),        // ✅ Correctly fetching booking_id
@@ -294,6 +294,41 @@ public static boolean updatePaymentStatus(int bookingId, String paymentStatus) {
         return false;
     }
 }
+
+
+public static Ride getBookingById(int bookingId) {
+        Ride ride = null;
+        String sql = "SELECT b.*, c.name AS customer_name FROM bookings b " +
+                     "JOIN customers c ON b.customer_id = c.customer_id WHERE b.booking_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, bookingId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                ride = new Ride(
+                    rs.getInt("booking_id"),
+                    rs.getInt("customer_id"),
+                    rs.getInt("booking_number"),
+                    rs.getString("pickup_location"),
+                    rs.getString("destination"),
+                    rs.getInt("distance"),
+                    rs.getInt("vehicle_id"),
+                    rs.getInt("driver_id"),
+                    rs.getBigDecimal("amount"),
+                    rs.getString("status"),
+                    rs.getString("payment_status")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ride;
+    }
+
+
 
 }
 
