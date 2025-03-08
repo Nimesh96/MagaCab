@@ -2,8 +2,6 @@ package com.magacab.servlets;
 
 import com.magacab.dao.RideDAO;
 import com.magacab.model.Ride;
-import com.magacab.model.User;
-import com.magacab.dao.VehicleDAO;
 import java.io.IOException;
 import java.math.BigDecimal;
 import javax.servlet.ServletException;
@@ -15,49 +13,72 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/BookRideServlet")
 public class BookRideServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        HttpSession session = request.getSession(false);
-        User user = (session != null) ? (User) session.getAttribute("user") : null;
-
-        if (user == null) {
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            // Debugging: Print all incoming request parameters
+            System.out.println("=== RECEIVED BOOKING DATA ===");
+            System.out.println("Booking Number: " + request.getParameter("bookingNumber"));
+            System.out.println("Pickup Location: " + request.getParameter("pickup"));
+            System.out.println("Destination: " + request.getParameter("destination"));
+            System.out.println("Distance: " + request.getParameter("distance"));
+            System.out.println("Vehicle ID: " + request.getParameter("vehicle_id"));
+
+            // Retrieve session user details
+            HttpSession userSession = request.getSession(false);
+            if (userSession == null || userSession.getAttribute("user") == null) {
+                System.out.println("🚨 Error: User session not found.");
+                response.sendRedirect("newBooking.jsp?error=true");
+                return;
+            }
+
+            com.magacab.model.User user = (com.magacab.model.User) userSession.getAttribute("user");
+            int customerId = user.getCustomerId(); // Assuming this is stored in the session
+
+            // Parse form values
             int bookingNumber = Integer.parseInt(request.getParameter("bookingNumber"));
             String pickup = request.getParameter("pickup");
             String destination = request.getParameter("destination");
             int distance = Integer.parseInt(request.getParameter("distance"));
             int vehicleId = Integer.parseInt(request.getParameter("vehicle_id"));
 
-            // Get vehicle price per KM
-            BigDecimal pricePerKm = VehicleDAO.getPricePerKm(vehicleId);
-            BigDecimal totalAmount = pricePerKm.multiply(new BigDecimal(distance));
+            // Calculate total price (example: 50 per KM)
+            BigDecimal totalAmount = new BigDecimal(distance * 50);
 
-            // Create Ride object
+            // ✅ Create Ride object with bookingId as 0 (Auto-incremented in DB)
             Ride ride = new Ride(
-                user.getCustomerId(), // int
-                        bookingNumber,        // int
-            pickup,               // String
-                        destination,          // String
-                        distance,             // int
-                        vehicleId,            // int
-                  totalAmount,          // BigDecimal
-                   "Pending"             // String
-);
+                0,            // ✅ Auto-increment bookingId
+                customerId,   // ✅ Correct order
+                bookingNumber,
+                pickup,
+                destination,
+                distance,
+                vehicleId,
+                0,  // Default driver ID (if not assigned yet)
+                totalAmount,
+                "Pending",
+                "Unpaid"
+            );
 
-            // Save ride to database
+            // Debugging: Print ride object details
+            System.out.println("✅ Created Ride Object: " + ride);
+
+            // Insert into database
             boolean success = RideDAO.bookRide(ride);
 
             if (success) {
+                System.out.println("✅ Booking Successfully Inserted!");
                 response.sendRedirect("newBooking.jsp?rideSuccess=true");
             } else {
+                System.out.println("❌ Booking Insertion Failed.");
                 response.sendRedirect("newBooking.jsp?error=true");
             }
+
+        } catch (NumberFormatException e) {
+            System.out.println("🚨 Number Format Exception: " + e.getMessage());
+            e.printStackTrace();
+            response.sendRedirect("newBooking.jsp?error=invalidNumber");
         } catch (Exception e) {
+            System.out.println("🚨 General Exception in BookRideServlet: " + e.getMessage());
             e.printStackTrace();
             response.sendRedirect("newBooking.jsp?error=true");
         }

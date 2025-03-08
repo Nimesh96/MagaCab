@@ -14,7 +14,7 @@
     } else {
         customers = UserDAO.getAllCustomers(); // Fetch all customers
     }
-    out.println("Debug: Total Customers Fetched: " + customers.size()); // Debugging line
+    //out.println("Debug: Total Customers Fetched: " + customers.size()); // Debugging line
 %>
 
 
@@ -48,6 +48,7 @@
                 <li><a href="manageBookings.jsp">📑 Manage Bookings</a></li>
                 <li><a href="manageCustomers.jsp">👥 Manage Customers</a></li>
                 <li><a href="manageVehicles.jsp">🚗 Manage Vehicles</a></li>
+                <li><a href="manageDrivers.jsp">👨🏻 ‍Manage Drivers</a></li>
             </ul>
         </div>
 

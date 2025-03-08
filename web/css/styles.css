@@ -1,289 +1,22 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Mar 2, 2025, 2:12:37 AM
-    Author     : nimeshbuddika
-*/
-
-button {
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #28a745;
-    color: white;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-
-/* Login Page Styling */
-.login-container {
-    width: 300px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.login-container h2 {
-    margin-bottom: 15px;
-}
-
-.login-container label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-}
-
-.login-container input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.login-container button:hover {
-    background-color: #218838;
-}
-
-.error-message {
-    color: red;
-    font-weight: bold;
-}
-
-
-
-/* Registration Page Styling */
-.register-container {
-    width: 350px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.register-container h2 {
-    margin-bottom: 15px;
-}
-
-.register-container label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-}
-
-.register-container input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.register-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.register-container button:hover {
-    background-color: #0056b3;
-}
-
-.success-message {
-    color: green;
-    font-weight: bold;
-}
-
-.error-message {
-    color: red;
-    font-weight: bold;
-}
-
-
-
-/* General Page Styling */
+/* ✅ General Styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
     margin: 0;
     padding: 0;
+    color: #333;
 }
 
-/* Navbar Styling */
+/* ✅ Navbar Styling */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background-color: #007bff;
     color: white;
     padding: 15px 20px;
-    font-size: 18px;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
-}
-
-/* Booking Container */
-.booking-container {
-    width: 50%;
-    margin: 30px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.booking-container h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-/* Form Styling */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-label {
-    font-weight: bold;
-    text-align: left;
-}
-
-input, select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-button {
-    background-color: #28a745;
-    color: white;
-    font-size: 18px;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 15px;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-
-/* Success Message */
-.success-message {
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-/* Error Message */
-.error-message {
-    background-color: #dc3545;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-
-/* General Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-.login-container, .dashboard-container {
-    width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-    margin-bottom: 15px;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Navbar */
-.navbar {
-    background-color: #007bff;
-    padding: 10px;
-    color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
@@ -292,24 +25,204 @@ button:hover {
     padding: 8px 15px;
     background-color: #dc3545;
     border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
 }
 
 .navbar a:hover {
     background-color: #c82333;
 }
 
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 10px 15px;
-    margin: 10px;
-    color: white;
-    text-decoration: none;
-    background-color: #28a745;
-    border-radius: 5px;
+/* ✅ Centered Container */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn:hover {
+/* ✅ Headings */
+h2 {
+    text-align: center;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 25px;
+    font-size: 26px;
+}
+
+/* ✅ Buttons */
+button, .btn {
+    display: inline-block;
+    padding: 12px 18px;
+    margin: 5px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+/* ✅ Button Colors */
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+.btn-success:hover {
     background-color: #218838;
 }
 
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+}
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+.btn-info:hover {
+    background-color: #138496;
+}
+
+/* ✅ Payment Table Styling */
+.payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-table th, .payment-table td {
+    padding: 14px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.payment-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.payment-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.payment-table tr:hover {
+    background-color: #e9ecef;
+}
+
+/* ✅ Coupon & Amount Styling */
+.coupon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.coupon-container input {
+    width: 140px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.coupon-container button {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.3s ease-in-out;
+}
+
+.coupon-container button:hover {
+    background-color: #e0a800;
+}
+
+/* ✅ Payment Info */
+.payment-info {
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.payment-info span {
+    display: block;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* ✅ Input Fields */
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+    max-width: 200px;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .payment-table {
+        font-size: 12px;
+    }
+    
+    .payment-table th, .payment-table td {
+        padding: 10px;
+    }
+    
+    .coupon-container {
+        flex-direction: column;
+    }
+    
+    .coupon-container input {
+        width: 100%;
+    }
+
+    button, .btn {
+        width: 100%;
+        padding: 10px;
+    }
+}

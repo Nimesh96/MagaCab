@@ -8,22 +8,20 @@ import java.util.ArrayList;
 
 public class UserDAO {
 
-    // **Register a new user**
+   
     public static boolean registerUser(User user) {
-        String sql = "INSERT INTO users (name, address, nic, phone, email, password) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getName());
-            stmt.setString(2, user.getAddress());
-            stmt.setString(3, user.getNic());
-            stmt.setString(4, user.getPhone());
-            stmt.setString(5, user.getEmail());
-            stmt.setString(6, user.getPassword());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPhone());
+            stmt.setString(4, user.getPassword());
 
-            int rowsInserted = stmt.executeUpdate();
-            return rowsInserted > 0;
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -31,7 +29,8 @@ public class UserDAO {
         return false;
     }
 
-    // **Login user by checking email and password**
+
+   
     public static User getUserByEmailAndPassword(String email, String password) {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 
@@ -62,7 +61,7 @@ public class UserDAO {
     
     public static List<User> getAllCustomers() {
     List<User> customers = new ArrayList<>();
-    String sql = "SELECT * FROM users ORDER BY customer_id DESC";
+    String sql = "SELECT * FROM users ORDER BY customerid DESC";
 
     try (Connection conn = DBConnection.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql);
@@ -70,7 +69,7 @@ public class UserDAO {
 
         while (rs.next()) {
             User user = new User(
-                rs.getInt("customer_id"),
+                rs.getInt("customerid"),
                 rs.getString("name"),
                 rs.getString("address"),
                 rs.getString("nic"),
@@ -93,7 +92,7 @@ public class UserDAO {
 }
     
 
-    // ✅ Fetch customers by NIC
+    
     public static List<User> getCustomersByNIC(String nic) {
         List<User> customers = new ArrayList<>();
         String sql = "SELECT * FROM users WHERE nic LIKE ?";
@@ -106,7 +105,7 @@ public class UserDAO {
 
             while (rs.next()) {
                 customers.add(new User(
-                        rs.getInt("customer_id"),
+                        rs.getInt("customerid"),
                         rs.getString("name"),
                         rs.getString("address"),
                         rs.getString("nic"),
@@ -121,9 +120,9 @@ public class UserDAO {
         return customers;
     }
 
-    // ✅ Delete a customer by ID
+    
     public static boolean deleteCustomer(int customerId) {
-        String sql = "DELETE FROM users WHERE customer_id = ?";
+        String sql = "DELETE FROM users WHERE customerid = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

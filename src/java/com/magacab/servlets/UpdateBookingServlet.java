@@ -1,27 +1,39 @@
 package com.magacab.servlets;
 
+import com.magacab.dao.RideDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.magacab.dao.RideDAO;
+
 
 @WebServlet("/UpdateBookingServlet")
 public class UpdateBookingServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int bookingNumber = Integer.parseInt(request.getParameter("bookingNumber"));
-        String status = request.getParameter("status");
+        try {
+            // Get parameters from request
+            int bookingNumber = Integer.parseInt(request.getParameter("bookingNumber"));
+            String status = request.getParameter("status");
 
-        boolean updated = RideDAO.updateBookingStatus(bookingNumber, status);
+            System.out.println("🔍 Received Update Request: Booking Number = " + bookingNumber + ", Status = " + status);
 
-        if (updated) {
-            response.sendRedirect("manageBookings.jsp?success=true");
-        } else {
-            response.sendRedirect("manageBookings.jsp?error=true");
+            // Update booking status in database
+            boolean success = RideDAO.updateBooking(bookingNumber, status);
+
+            if (success) {
+                System.out.println("✅ Booking Updated Successfully!");
+                response.sendRedirect("manageBookings.jsp?updateSuccess=true");
+            } else {
+                System.out.println("❌ Booking Update Failed.");
+                response.sendRedirect("manageBookings.jsp?updateError=true");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("🚨 Exception in UpdateBookingServlet: " + e.getMessage());
+            response.sendRedirect("manageBookings.jsp?updateError=true");
         }
     }
 }

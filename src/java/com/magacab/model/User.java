@@ -1,7 +1,8 @@
+
 package com.magacab.model;
 
 public class User {
-    private int customerId;  // 
+    private int customerId;  
     private String name;
     private String address;
     private String nic;
@@ -9,7 +10,7 @@ public class User {
     private String email;
     private String password;
 
-    // Constructor
+
     public User(int customerId, String name, String address, String nic, String phone, String email, String password) {
         this.customerId = customerId;
         this.name = name;
@@ -20,7 +21,17 @@ public class User {
         this.password = password;
     }
 
-    // Getters and Setters
+
+    public User(String name, String address, String nic, String phone, String email, String password) {
+        this.name = name;
+        this.address = address;
+        this.nic = nic;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+    }
+
+
     public int getCustomerId() { return customerId; }
     public void setCustomerId(int customerId) { this.customerId = customerId; }
 
