@@ -96,6 +96,16 @@
         .btn-history:hover {
             background-color: #138496;
         }
+
+        /* ✅ New Payment Button */
+        .btn-payment {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .btn-payment:hover {
+            background-color: #e0a800;
+        }
     </style>
 </head>
 <body>
@@ -118,6 +128,7 @@
         <div class="button-container">
             <a href="newBooking.jsp" class="btn btn-book">🚖 Book a Ride</a>
             <a href="bookingHistory.jsp" class="btn btn-history">📜 View Booking History</a>
+            <a href="payments.jsp" class="btn btn-payment">💳 Go to Payment</a> <!-- ✅ New Payment Button -->
         </div>
     </div>
 

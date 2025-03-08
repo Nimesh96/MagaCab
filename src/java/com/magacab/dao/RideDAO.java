@@ -256,4 +256,47 @@ public static boolean updateDriverForBooking(int bookingId, int driverId) {
     return false;
 }
     
+    
+    public static List<Ride> getBookingsByStatusAndUser(String status, int customerId) {
+    List<Ride> rides = new ArrayList<>();
+    String sql = "SELECT * FROM bookings WHERE status = ? AND customer_id = ?";
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, status);
+        stmt.setInt(2, customerId);
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            rides.add(mapResultSetToRide(rs));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return rides;
 }
+      
+    
+    
+public static boolean updatePaymentStatus(int bookingId, String paymentStatus) {
+    String sql = "UPDATE bookings SET payment_status = ? WHERE booking_id = ?";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setString(1, paymentStatus);
+        stmt.setInt(2, bookingId);
+
+        int rowsUpdated = stmt.executeUpdate();
+        return rowsUpdated > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
+}
+
+    
+    
+    
