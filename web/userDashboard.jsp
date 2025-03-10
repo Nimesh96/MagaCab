@@ -18,114 +18,75 @@
 <head>
     <meta charset="UTF-8">
     <title>User Dashboard - MagaCab</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        /* Top Navigation Bar */
-        .navbar {
-            background-color: #007bff;
-            overflow: hidden;
+        /* Background Gradient */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            padding: 10px 20px;
-            color: white;
-            font-size: 18px;
         }
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            background-color: #dc3545;
+        /* Navigation Bar */
+        .navbar {
+            width: 100%;
+            background-color: rgba(0, 123, 255, 0.9);
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar a:hover {
-            background-color: #c82333;
-        }
-
-        /* Main Content */
+        /* Dashboard Container */
         .dashboard-container {
-            width: 50%;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
             text-align: center;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 80px;
+            animation: fadeIn 0.8s ease-in-out;
         }
 
-        .dashboard-container h2 {
-            margin-bottom: 10px;
-        }
-
-        .dashboard-container p {
-            font-size: 16px;
-            margin: 5px 0;
-        }
-
-        /* Button Styles */
-        .button-container {
-            margin-top: 20px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            display: inline-block;
-            margin: 5px;
-        }
-
-        .btn-book {
-            background-color: #28a745;
-        }
-
-        .btn-book:hover {
-            background-color: #218838;
-        }
-
-        .btn-history {
-            background-color: #17a2b8;
-        }
-
-        .btn-history:hover {
-            background-color: #138496;
-        }
-
-        /* ✅ New Payment Button */
-        .btn-payment {
-            background-color: #ffc107;
-            color: black;
-        }
-
-        .btn-payment:hover {
-            background-color: #e0a800;
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
-    <div class="navbar">
-        <div>Welcome, <%= user.getName() %>!</div>
-        <a href="LogoutServlet">Logout</a>
-    </div>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <span class="navbar-brand fw-bold">Welcome, <%= user.getName() %>!</span>
+            <a href="LogoutServlet" class="btn btn-danger">Logout</a>
+        </div>
+    </nav>
 
-    <!-- User Dashboard Content -->
-    <div class="dashboard-container">
-        <h2>User Details</h2>
-        <p><strong>Email:</strong> <%= user.getEmail() %></p>
-        <p><strong>Phone:</strong> <%= user.getPhone() %></p>
-        <p><strong>NIC:</strong> <%= user.getNic() %></p>
-        <p><strong>Address:</strong> <%= user.getAddress() %></p>
+    
+    <div class="container d-flex justify-content-center">
+        <div class="dashboard-container">
+            <h2 class="text-primary fw-bold">User Details</h2>
+            <p><strong>Email:</strong> <%= user.getEmail() %></p>
+            <p><strong>Phone:</strong> <%= user.getPhone() %></p>
+            <p><strong>NIC:</strong> <%= user.getNic() %></p>
+            <p><strong>Address:</strong> <%= user.getAddress() %></p>
 
-        <!-- Buttons -->
-            <div class="d-flex justify-content-center gap-3 mt-3">
+            
+            <div class="d-flex justify-content-center flex-wrap gap-3 mt-3">
                 <a href="newBooking.jsp" class="btn btn-success fw-bold px-4">
                     🚖 Book a Ride
                 </a>
@@ -135,11 +96,15 @@
                 <a href="payments.jsp" class="btn btn-warning fw-bold px-4">
                     💳 Go to Payment
                 </a>
-                    <a href="help.html" class="btn fw-bold px-4" style="background-color: #6610f2; color: white;">
-                      ❓ Help
-                    </a> <!-- ✅ Custom Purple Help Button -->
+                <a href="help.html" class="btn fw-bold px-4 text-white" style="background-color: #6610f2;">
+                    ❓ Help
+                </a> 
             </div>
+        </div>
     </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

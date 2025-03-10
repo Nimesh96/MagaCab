@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 public class BookRideServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Debugging: Print all incoming request parameters
+            
             System.out.println("=== RECEIVED BOOKING DATA ===");
             System.out.println("Booking Number: " + request.getParameter("bookingNumber"));
             System.out.println("Pickup Location: " + request.getParameter("pickup"));
@@ -23,7 +23,7 @@ public class BookRideServlet extends HttpServlet {
             System.out.println("Distance: " + request.getParameter("distance"));
             System.out.println("Vehicle ID: " + request.getParameter("vehicle_id"));
 
-            // Retrieve session user details
+            
             HttpSession userSession = request.getSession(false);
             if (userSession == null || userSession.getAttribute("user") == null) {
                 System.out.println("🚨 Error: User session not found.");
@@ -32,37 +32,37 @@ public class BookRideServlet extends HttpServlet {
             }
 
             com.magacab.model.User user = (com.magacab.model.User) userSession.getAttribute("user");
-            int customerId = user.getCustomerId(); // Assuming this is stored in the session
+            int customerId = user.getCustomerId(); 
 
-            // Parse form values
+            
             int bookingNumber = Integer.parseInt(request.getParameter("bookingNumber"));
             String pickup = request.getParameter("pickup");
             String destination = request.getParameter("destination");
             int distance = Integer.parseInt(request.getParameter("distance"));
             int vehicleId = Integer.parseInt(request.getParameter("vehicle_id"));
 
-            // Calculate total price (example: 50 per KM)
+            
             BigDecimal totalAmount = new BigDecimal(distance * 50);
 
-            // ✅ Create Ride object with bookingId as 0 (Auto-incremented in DB)
+            
             Ride ride = new Ride(
-                0,            // ✅ Auto-increment bookingId
-                customerId,   // ✅ Correct order
+                0,            
+                customerId,   
                 bookingNumber,
                 pickup,
                 destination,
                 distance,
                 vehicleId,
-                0,  // Default driver ID (if not assigned yet)
+                0,  
                 totalAmount,
                 "Pending",
                 "Unpaid"
             );
 
-            // Debugging: Print ride object details
+            
             System.out.println("✅ Created Ride Object: " + ride);
 
-            // Insert into database
+            
             boolean success = RideDAO.bookRide(ride);
 
             if (success) {

@@ -10,24 +10,26 @@ public class UserDAO {
 
    
     public static boolean registerUser(User user) {
-        String sql = "INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users (name, address, nic, phone, email, password) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getName());
-            stmt.setString(2, user.getEmail());
-            stmt.setString(3, user.getPhone());
-            stmt.setString(4, user.getPassword());
+            stmt.setString(2, user.getAddress());
+            stmt.setString(3, user.getNic());
+            stmt.setString(4, user.getPhone());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getPassword());
 
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0;
+            return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
+
 
 
    

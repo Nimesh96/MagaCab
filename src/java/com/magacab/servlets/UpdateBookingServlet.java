@@ -19,7 +19,7 @@ public class UpdateBookingServlet extends HttpServlet {
 
             System.out.println("🔍 Received Update Request: Booking Number = " + bookingNumber + ", Status = " + status);
 
-            // Update booking status in database
+            
             boolean success = RideDAO.updateBooking(bookingNumber, status);
 
             if (success) {

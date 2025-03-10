@@ -224,7 +224,7 @@ public static boolean updateDriverForBooking(int bookingId, int driverId) {
         stmt.setInt(1, driverId);
         stmt.setInt(2, bookingNumber);
 
-        return stmt.executeUpdate() > 0; // Returns true if at least one row was updated
+        return stmt.executeUpdate() > 0; 
 
     } catch (SQLException e) {
         e.printStackTrace();
@@ -247,7 +247,7 @@ public static boolean updateDriverForBooking(int bookingId, int driverId) {
         System.out.println("📌 SQL Executed: " + sql);
         System.out.println("📌 Rows Affected: " + rowsUpdated);
 
-        return rowsUpdated > 0; // Returns true if the update was successful
+        return rowsUpdated > 0; 
 
     } catch (SQLException e) {
         e.printStackTrace();

@@ -9,36 +9,166 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 70px; /* Offset for fixed navbar */
+        }
+
+        /* ✅ Navbar */
+        .navbar {
+            background: #007bff !important;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .navbar-brand {
+            font-weight: bold;
+            color: white;
+        }
+
+        .navbar .btn-danger {
+            font-weight: bold;
+        }
+
+        /* Help Container */
         .help-container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+            padding: 30px;
             background: white;
+            border-radius: 12px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .help-container h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+        }
+
+        .help-container p {
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+        }
+
+        /* Step Flowchart */
+        .step-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff;
             border-radius: 8px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s ease-in-out;
+        }
+
+        .step-container:hover {
+            transform: scale(1.02);
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .step-text {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        /* Back Button */
+        .btn-back {
+            margin-top: 30px;
+            padding: 12px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Fade-In Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
+    <!-- ✅ Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <span class="navbar-brand">MagaCab Help Center</span>
+            <a href="userDashboard.jsp" class="btn btn-danger">Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- ✅ Help Page Content -->
     <div class="container">
         <div class="help-container">
-            <h2 class="text-primary text-center">❓ How to Use MagaCab</h2>
-            <p class="text-center">Follow these steps to book your ride.</p>
-            
-            <ol>
-                <li>Go to the **User Dashboard**.</li>
-                <li>Click **"Book a Ride"** to schedule a new trip.</li>
-                <li>Check **"Booking History"** to view past bookings.</li>
-                <li>Visit **"Payments"** to complete any pending payments.</li>
-                <li>If you need any assistance, contact our support.</li>
-            </ol>
+            <h2>❓ How to Use MagaCab</h2>
+            <p>Follow these simple steps to book your ride with ease.</p>
+
+            <!-- ✅ Step 1 -->
+            <div class="step-container">
+                <div class="step-icon">1</div>
+                <div class="step-text">Go to the <strong>User Dashboard</strong> to manage your bookings.</div>
+            </div>
+
+            <!-- ✅ Step 2 -->
+            <div class="step-container">
+                <div class="step-icon">2</div>
+                <div class="step-text">Click <strong>"Book a Ride"</strong> to schedule a new trip.</div>
+            </div>
+
+            <!-- ✅ Step 3 -->
+            <div class="step-container">
+                <div class="step-icon">3</div>
+                <div class="step-text">Check <strong>"Booking History"</strong> to view past rides.</div>
+            </div>
+
+            <!-- ✅ Step 4 -->
+            <div class="step-container">
+                <div class="step-icon">4</div>
+                <div class="step-text">Visit <strong>"Payments"</strong> to complete pending payments.</div>
+            </div>
+
+            <!-- ✅ Step 5 -->
+            <div class="step-container">
+                <div class="step-icon">5</div>
+                <div class="step-text">Need help? Contact our <strong>Support Team</strong> anytime.</div>
+            </div>
 
             <div class="text-center">
-                <a href="userDashboard.jsp" class="btn btn-primary">⬅ Back to Dashboard</a>
+                <a href="userDashboard.jsp" class="btn btn-primary btn-back">⬅ Back to Dashboard</a>
             </div>
         </div>
     </div>
+
+    <!-- Bootstrap 5 JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
