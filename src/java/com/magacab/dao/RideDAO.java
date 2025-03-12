@@ -330,6 +330,42 @@ public static Ride getBookingById(int bookingId) {
 
 
 
+public static List<Ride> getAssignedRides(int driverId) {
+    List<Ride> rides = new ArrayList<>();
+    String sql = "SELECT * FROM bookings WHERE driver_id = ? ORDER BY booking_id DESC";
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, driverId);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Ride ride = new Ride(
+                rs.getInt("booking_id"),
+                rs.getInt("customer_id"),
+                rs.getInt("booking_number"),
+                rs.getString("pickup_location"),
+                rs.getString("destination"),
+                rs.getInt("distance"),
+                rs.getInt("vehicle_id"),
+                rs.getInt("driver_id"),
+                rs.getBigDecimal("amount"),
+                rs.getString("status"),
+                rs.getString("payment_status")
+            );
+            rides.add(ride);
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return rides;
+}
+
+
+
+
 }
 
     

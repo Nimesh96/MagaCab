@@ -6,6 +6,7 @@ import com.magacab.utils.DBConnection;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.magacab.model.Ride;
 
 public class DriverDAO {
 
@@ -123,8 +124,35 @@ public static boolean updateDriver(int driverId, String name, String nic, String
         }
         return drivers;
     }
+      
     
-    
+    public static Driver getDriverByNameAndNIC(String name, String nic) {
+    Driver driver = null;
+    try (Connection conn = DBConnection.getConnection()) {
+        String sql = "SELECT * FROM drivers WHERE name = ? AND nic = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, name.trim());
+        stmt.setString(2, nic.trim());
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            driver = new Driver(
+                rs.getInt("driver_id"),  // Ensure column name is correct
+                rs.getString("name"),
+                rs.getString("nic"),
+                rs.getString("phone"),
+                rs.getString("license_number"),
+                rs.getInt("vehicle_id")
+            );
+            System.out.println("✅ Driver Found: " + driver.getName());
+        } else {
+            System.out.println("❌ Driver Not Found: " + name + " | " + nic);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return driver;
+}
     
     
 }
